@@ -6,24 +6,26 @@
 package mx.unam.aragon.fes.gui;
 
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import mx.unam.aragon.fes.Direccion;
 import mx.unam.aragon.fes.Empleado;
-
-
+import mx.unam.aragon.fes.persistencia.ArchivoEmpleado;
 
 /**
  *
  * @author unam
  */
 public class AltaEmpleado extends javax.swing.JFrame {
-private ArrayList<Empleado> Lista;
+
+    private ArrayList<Empleado> Lista;
+
     /**
      * Creates new form AltaEmpleado
      */
     public AltaEmpleado() {
         initComponents();
-        Lista=new ArrayList<Empleado>();
+        Lista = new ArrayList<Empleado>();
     }
 
     /**
@@ -301,6 +303,11 @@ private ArrayList<Empleado> Lista;
         jTabbedPane1.addTab("Empresariales", jPanel2);
 
         jButton1.setText("Guardar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("Cargar");
 
@@ -368,21 +375,20 @@ private ArrayList<Empleado> Lista;
         // TODO add your handling code here:
         System.out.println("Nuevo empleado!!!");
         this.limpiarFormulario();
-        this.jButton6.setEnabled(true); 
-        
-       
-        
+        this.jButton6.setEnabled(true);
+
+
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
-                
-         Empleado emp= new Empleado();
-        emp.setNombre( this.jTextField1.getText() );
-        emp.setApPaterno(this.jTextField2.getText() );
-        emp.setApMaterno( jTextField3.getText() );
-        emp.setEdad( Integer.parseInt( jTextField4.getText()  )  );  // converte a int
-        emp.setCurp( jTextField5.getText());
+
+        Empleado emp = new Empleado();
+        emp.setNombre(this.jTextField1.getText());
+        emp.setApPaterno(this.jTextField2.getText());
+        emp.setApMaterno(jTextField3.getText());
+        emp.setEdad(Integer.parseInt(jTextField4.getText()));  // converte a int
+        emp.setCurp(jTextField5.getText());
         emp.setDomicilio(new Direccion());
         emp.getDomicilio().setCalle(this.jTextField6.getText());
         emp.getDomicilio().setNumero(this.jTextField7.getText());
@@ -395,44 +401,56 @@ private ArrayList<Empleado> Lista;
         emp.setSueldo(Float.parseFloat(this.jTextField13.getText()));
         emp.setHorasExtra(Integer.parseInt(this.jTextField14.getText()));
         int confirmar = JOptionPane.showConfirmDialog(this, "¿Deseas guardar estos datos?");
-       // subirlo a memoria
-        System.out.println("boton:"+confirmar);
-        if (confirmar==0){
+        // subirlo a memoria
+        System.out.println("boton:" + confirmar);
+        if (confirmar == 0) {
             Lista.add(emp);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "¡¡¡ No se guardo el empleado!!!");
-            
-            System.out.println("Empleado en el ARRGLO="+ Lista.size());
+
+            System.out.println("Empleado en el ARRGLO=" + Lista.size());
             limpiarFormulario();
             jButton6.setEnabled(false);
         }
     }//GEN-LAST:event_jButton6MouseClicked
 
-     
-    private void limpiarFormulario(){
-      this.jTextField1.setText("");
-      this.jTextField2.setText("");
-      this.jTextField3.setText("");
-      this.jTextField4.setText("0");
-      this.jTextField5.setText("");
-      this.jTextField6.setText("");
-      this.jTextField7.setText("");
-      this.jTextField8.setText("");
-      this.jTextField9.setText("");
-      this.jTextField10.setText("");
-      this.jTextField10.setColumns(10);
-      this.jTextField11.setText("0");
-      this.jTextField11.setColumns(10);
-      this.jTextField12.setText("");
-      this.jTextField13.setText("0.0");
-      this.jTextField14.setText("0");
-      this.jTextField15.setText("");
-      
-      
-      
-      
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        ArchivoEmpleado persistencia = new ArchivoEmpleado();
+
+        JFileChooser jfc = new JFileChooser();
+        jfc.showSaveDialog(this);
+        String archivo = jfc.getSelectedFile().getAbsolutePath();
+        System.out.println("ruta seleccionada es:" + archivo);
+        persistencia.setArchivo(archivo);
+        try {
+            persistencia.guardarEmpleados(Lista);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void limpiarFormulario() {
+        this.jTextField1.setText("");
+        this.jTextField2.setText("");
+        this.jTextField3.setText("");
+        this.jTextField4.setText("0");
+        this.jTextField5.setText("");
+        this.jTextField6.setText("");
+        this.jTextField7.setText("");
+        this.jTextField8.setText("");
+        this.jTextField9.setText("");
+        this.jTextField10.setText("");
+        this.jTextField10.setColumns(10);
+        this.jTextField11.setText("0");
+        this.jTextField11.setColumns(10);
+        this.jTextField12.setText("");
+        this.jTextField13.setText("0.0");
+        this.jTextField14.setText("0");
+        this.jTextField15.setText("");
+
     }
-    
+
     /**
      * @param args the command line arguments
      */
