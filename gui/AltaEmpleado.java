@@ -496,6 +496,24 @@ public class AltaEmpleado extends javax.swing.JFrame {
             this.jTextField3.setText(e.getApMaterno());
             this.jTextField4.setText(""+ e.getEdad());
             this.jTextField5.setText(e.getCurp());
+            this.jTextField6.setText(e.getDomicilio().getCalle());
+            this.jTextField7.setText(e.getDomicilio().getColonia());
+            this.jTextField8.setText(e.getDomicilio().getNumero());
+            this.jTextField9.setText(e.getDomicilio().getDelegacion());
+            this.jTextField10.setText(e.getDomicilio().getEstado());
+            this.jTextField11.setText(e.getDomicilio().getCp());
+            this.jTextField12.setText("" + e.getNumeroEmpleado());
+            this.jTextField13.setText(e.getDepartamento());
+            this.jTextField14.setText("" +e.getSueldo());
+            this.jTextField15.setText(""+ e.getHorasExtra());
+            
+            
+            
+            
+            
+            
+            ;
+             
             //terminar tarea 
             
         }
