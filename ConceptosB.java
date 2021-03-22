@@ -24,6 +24,22 @@ public class ConceptosB {
         miBocho.setModelo(1970);
         miBocho.setColor(Color.RED);
         System.out.println(miBocho);
+        
+        
+        Automovil miAkura= new Automovil();
+        miAkura.setMarca("Akura");
+        miAkura.setSubMarca("NSX");
+        miAkura.setModelo(2013);
+        miAkura.setColor(Color.BLUE );
+        System.out.println(miAkura);
+        
+        
+        Automovil miMustang= new Automovil();
+        miMustang.setMarca("Ford");
+        miMustang.setSubMarca("Mustan");
+        miMustang.setModelo(2010);
+        miMustang.setColor(Color.YELLOW);
+        System.out.println(miMustang);
     }
     
 }
